@@ -10,7 +10,7 @@ api_hash = os.environ['TG_API_HASH']
 session_string = os.environ['TG_SESSION']
 
 # --- CONFIGURAÇÃO ---
-TERMOS = ['rtx 4060', 'ryzen 5', 'ssd 1tb', 'monitor'] # Seus termos em minúsculo
+TERMOS = ['ultragear', 'LG', 'Ultragear', 'Ultragear 34'] # Seus termos em minúsculo
 CHATS_ALVO = [] # Deixe vazio [] para ler TODOS os grupos, ou coloque IDs: [-100123456, -100987654]
 
 async def main():
