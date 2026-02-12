@@ -28,4 +28,6 @@ jobs:
           TG_API_ID: ${{ secrets.TG_API_ID }}
           TG_API_HASH: ${{ secrets.TG_API_HASH }}
           TG_SESSION: ${{ secrets.TG_SESSION }}
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          MEU_CHAT_ID: ${{ secrets.MEU_CHAT_ID }}
         run: python bot_agendado.py
