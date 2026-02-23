@@ -15,7 +15,7 @@ bot_token = os.environ['BOT_TOKEN']
 chat_id_destino = os.environ['MEU_CHAT_ID']
 
 # --- CONFIGURAÇÃO ---
-TERMOS = ['lg ultragear 34'] 
+TERMOS = ['lg ultragear 34', 'aula f75'] 
 CHATS_ALVO = [] 
 
 # Função para enviar via BOT (Isso gera notificação!)
