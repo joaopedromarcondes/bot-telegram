@@ -28,10 +28,14 @@ def enviar_notificacao(mensagem):
         "disable_web_page_preview": True
     }
     try:
-        requests.post(url, data=dados)
-        print("Notificação enviada com sucesso!")
+        resposta = requests.post(url, data=dados)
+        # Agora o bot vai nos contar a verdade:
+        if resposta.status_code == 200:
+            print("Notificação entregue de verdade no seu Telegram!")
+        else:
+            print(f"O Telegram recusou a mensagem! Erro: {resposta.text}")
     except Exception as e:
-        print(f"Erro ao notificar: {e}")
+        print(f"Erro de conexão com a internet: {e}")
 
 async def main():
     print("Iniciando verificação...")
