@@ -36,8 +36,8 @@ def enviar_notificacao(mensagem):
 async def main():
     print("Iniciando verificação...")
     async with TelegramClient(StringSession(session_string), api_id, api_hash) as client:
-        # Verifica últimos 35 minutos
-        limite_tempo = datetime.now(timezone.utc) - timedelta(minutes=35)
+        # Verifica últimas 2 horas
+        limite_tempo = datetime.now(timezone.utc) - timedelta(hours=2)
         
         async for dialog in client.iter_dialogs():
             if CHATS_ALVO and (dialog.id not in CHATS_ALVO):
