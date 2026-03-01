@@ -44,6 +44,11 @@ async def main():
         limite_tempo = datetime.now(timezone.utc) - timedelta(hours=2)
         
         async for dialog in client.iter_dialogs():
+            # 🛑 TRAVA 1: Ignora conversas privadas (incluindo o seu Bot Carteiro)
+            # Foca apenas em Grupos e Canais de ofertas
+            if dialog.is_user:
+                continue
+            
             if CHATS_ALVO and (dialog.id not in CHATS_ALVO):
                 continue
 
@@ -53,6 +58,10 @@ async def main():
                     if not message.text: continue
                         
                     texto = message.text.lower()
+
+                    # 🛑 TRAVA 2: Se a mensagem for um alerta do próprio bot, ignora!
+                    if "achei oferta!" in texto:
+                        continue
                     
                     for termo in TERMOS:
                         if termo in texto:
