@@ -15,7 +15,7 @@ bot_token = os.environ['BOT_TOKEN']
 chat_id_destino = os.environ['MEU_CHAT_ID']
 
 # --- CONFIGURAÇÃO ---
-TERMOS = ['lg ultragear 34'] 
+TERMOS = ['aula f75'] 
 CHATS_ALVO = [] 
 
 # Função para enviar via BOT (Isso gera notificação!)
@@ -28,18 +28,27 @@ def enviar_notificacao(mensagem):
         "disable_web_page_preview": True
     }
     try:
-        requests.post(url, data=dados)
-        print("Notificação enviada com sucesso!")
+        resposta = requests.post(url, data=dados)
+        # Agora o bot vai nos contar a verdade:
+        if resposta.status_code == 200:
+            print("Notificação entregue de verdade no seu Telegram!")
+        else:
+            print(f"O Telegram recusou a mensagem! Erro: {resposta.text}")
     except Exception as e:
-        print(f"Erro ao notificar: {e}")
+        print(f"Erro de conexão com a internet: {e}")
 
 async def main():
     print("Iniciando verificação...")
     async with TelegramClient(StringSession(session_string), api_id, api_hash) as client:
-        # Verifica últimos 35 minutos
-        limite_tempo = datetime.now(timezone.utc) - timedelta(minutes=35)
+        # Verifica últimas 2 horas
+        limite_tempo = datetime.now(timezone.utc) - timedelta(hours=2)
         
         async for dialog in client.iter_dialogs():
+            # 🛑 TRAVA 1: Ignora conversas privadas (incluindo o seu Bot Carteiro)
+            # Foca apenas em Grupos e Canais de ofertas
+            if dialog.is_user:
+                continue
+            
             if CHATS_ALVO and (dialog.id not in CHATS_ALVO):
                 continue
 
@@ -49,6 +58,10 @@ async def main():
                     if not message.text: continue
                         
                     texto = message.text.lower()
+
+                    # 🛑 TRAVA 2: Se a mensagem for um alerta do próprio bot, ignora!
+                    if "achei oferta!" in texto:
+                        continue
                     
                     for termo in TERMOS:
                         if termo in texto:
