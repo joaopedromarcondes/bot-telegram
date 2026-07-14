@@ -15,7 +15,7 @@ bot_token = os.environ['BOT_TOKEN']
 chat_id_destino = os.environ['MEU_CHAT_ID']
 
 # --- CONFIGURAÇÃO ---
-TERMOS = ['i5-12400f', 'fonte corsair', ' 5700x', 'b550m vdh wifi', 'ssd nvme 1tb', '5500x3d'] 
+TERMOS = ['i5-12400f', 'fonte corsair', ' 5700x', 'vdh', 'ssd nvme 1tb', '5500x3d'] 
 CHATS_ALVO = [] 
 
 # Função para enviar via BOT (Isso gera notificação!)
